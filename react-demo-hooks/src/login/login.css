@@ -26,25 +26,24 @@
 }
 
 .neddAccount {
-    float:right;
-    padding-top: 10px;
-    color:white;
-    font-weight: bold;
+  float: right;
+  padding-top: 10px;
+  color: white;
+  font-weight: bold;
 }
 
- 
 .submitbutton {
-
+  margin-top: 15vh;
   width: 20vw;
   margin-bottom: 5vh;
 }
 
 .alertText {
-    margin: auto;
-    background-color: #d1ecf1 ;
-    color : #0c5460;
-    border-color: #bee5eb;
-    height: 50px;
-    text-align: center;
-    line-height: 50px; /* same as height! */
+  margin: auto;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-color: #bee5eb;
+  height: 50px;
+  text-align: center;
+  line-height: 50px; /* same as height! */
 }

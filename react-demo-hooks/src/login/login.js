@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
 //others
-import wallpaper from "../../assets/register_page.jpg";
+import wallpaper from "../assets/register_page.jpg";
 import "./login.css";
 
 const Login = () => {
@@ -61,9 +61,6 @@ const Login = () => {
           placeholder={"Password"}
           onChange={handleChange}
         />
-        <a href="/signup" className="neddAccount">
-          Need an account? SIGN UP
-        </a>
         <Button color="info" className="submitbutton" onClick={loginHandler}>
           Login
         </Button>

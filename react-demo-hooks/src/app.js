@@ -6,8 +6,7 @@ import NavigationBar from './navigation-bar';
 import Home from './home/home';
 import PersonContainer from './person/person-container';
 import ErrorPage from './commons/errorhandling/error-page';
-import Login from './register/login/login'
-import SignUp from './register/signup/signup'
+import Login from './login/login'
 //others
 import styles from './commons/styles/project-style.css';
 
@@ -33,11 +32,7 @@ function App() {
                             render = {()=> <Login/>}
                         />
 
-                        <Route
-                            exact
-                            path='/signup'
-                            render = {()=> <SignUp/>}
-                        />
+                
                         <Route
                             exact
                             path='/'
