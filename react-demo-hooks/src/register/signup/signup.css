@@ -32,3 +32,14 @@
       margin-top: 5vh;
       width: 20vw;
   }
+
+  
+.alertText {
+    margin: auto;
+    background-color: #d1ecf1 ;
+    color : #0c5460;
+    border-color: #bee5eb;
+    height: 50px;
+    text-align: center;
+    line-height: 50px; /* same as height! */
+}
