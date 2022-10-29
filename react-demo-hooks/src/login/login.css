@@ -13,8 +13,10 @@
 .title {
   justify-content: center;
   display: flex;
-  margin-top: 5vh;
+  margin-bottom: 5vh;
   color: white;
+  font-weight: bold;
+  
 }
 
 .formlogin {
