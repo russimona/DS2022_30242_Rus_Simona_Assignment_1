@@ -1,0 +1,37 @@
+.wallpaperImage {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.labelloginform {
+  color: white;
+  font-size: 15px;
+  margin-top: 5vh;
+}
+
+.title {
+  justify-content: center;
+  display: flex;
+  margin-top: 5vh;
+  color: white;
+}
+
+.formlogin {
+  padding: 40px;
+  width: 25vw;
+  margin: auto;
+  margin-top: 10vh;
+  background-image: linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97));
+}
+
+.neddAccount {
+    float:right;
+    padding-top: 10px;
+}
+
+.submitbutton {
+
+  width: 20vw;
+  margin-bottom: 5vh;
+}
