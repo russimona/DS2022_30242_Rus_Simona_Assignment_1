@@ -1,63 +1,47 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //components
-import NavigationBar from './navigation-bar';
-import Home from './home/home';
-import PersonContainer from './person/person-container';
-import ErrorPage from './commons/errorhandling/error-page';
-import Login from './login/login'
+import Home from "./home/home";
+import PersonContainer from "./person/person-container";
+import ErrorPage from "./commons/errorhandling/error-page";
+import Login from "./login/login";
+import AdminHome from "./admin/admin-home";
+import AddUser from "./admin/user/add/add-user";
+import AddDevice from "./admin/device/add/add-device";
+
 //others
-import styles from './commons/styles/project-style.css';
+import styles from "./commons/styles/project-style.css";
 
-/*
-    Namings: https://reactjs.org/docs/jsx-in-depth.html#html-tags-vs.-react-components
-    Should I use hooks?: https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both
-*/
+
+
 function App() {
+  return (
+    <div className={styles.back}>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/login" render={() => <Login />} />
 
-    const showNavBar = window.location.href.includes('login') || window.location.href.includes('signup');
-  
-    return (
-        <div className={styles.back}>
-            <Router>
-                <div>
-                   {!showNavBar && <NavigationBar />}
+            <Route exact path="/admin" render={() => <AdminHome />} />
 
-                    <Switch>
+            <Route exact path="/" render={() => <Home />} />
 
-                        <Route
-                            exact
-                            path='/login'
-                            render = {()=> <Login/>}
-                        />
+            <Route exact path="/person" render={() => <PersonContainer />} />
 
-                
-                        <Route
-                            exact
-                            path='/'
-                            render={() => <Home />}
-                        />
+            <Route exact path="/admin/add-user" render={() => <AddUser />} />
 
-                        <Route
-                            exact
-                            path='/person'
-                            render={() => <PersonContainer />}
-                        />
+            <Route exact path="/admin/add-device" render={() => <AddDevice />} />
 
-                        {/*Error*/}
-                        <Route
-                            exact
-                            path='/error'
-                            render={() => <ErrorPage />}
-                        />
+            {/*Error*/}
+            <Route exact path="/error" render={() => <ErrorPage />} />
 
-                        <Route render={() => <ErrorPage />} />
-                    </Switch>
-                </div>
-            </Router>
+            <Route render={() => <ErrorPage />} />
+          </Switch>
         </div>
-    );
+      </Router>
+    </div>
+  );
 }
 
 export default App;

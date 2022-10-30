@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
 //others
@@ -28,7 +28,7 @@ const Login = () => {
   const validateInput = () => {
     if (email.length < 10 || password.length < 5) {
       setIsAlert(true);
-      setAlertMessage("Please enter a correct username and password. ");
+      setAlertMessage("Please enter a valid username and password. ");
     } else {
       setIsAlert(false);
       setAlertMessage("");

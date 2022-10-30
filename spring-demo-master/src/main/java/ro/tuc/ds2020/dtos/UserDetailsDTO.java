@@ -13,7 +13,7 @@ public class UserDetailsDTO {
 
     @NotNull
     private String surname;
-    private String address;
+    private String role;
 
     @NotNull
     private String email;
@@ -24,19 +24,19 @@ public class UserDetailsDTO {
     public UserDetailsDTO() {
     }
 
-    public UserDetailsDTO(String name, String surname, String address, String email, String password) {
+    public UserDetailsDTO(String name, String surname, String role, String email, String password) {
         this.name = name;
         this.surname = surname;
-        this.address = address;
+        this.role = role;
         this.email = email;
         this.password = password;
     }
 
-    public UserDetailsDTO(UUID id, String name, String surname, String address, String email, String password) {
+    public UserDetailsDTO(UUID id, String name, String surname, String role, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.address = address;
+        this.role = role;
         this.email = email;
         this.password = password;
     }
@@ -57,12 +57,12 @@ public class UserDetailsDTO {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getRole() {
+        return role;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setRole(String address) {
+        this.role = role;
     }
 
     public String getSurname() {
@@ -96,11 +96,12 @@ public class UserDetailsDTO {
         UserDetailsDTO that = (UserDetailsDTO) o;
         return email == that.email &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(address, that.address);
+                Objects.equals(role, that.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, address, email);
+        return Objects.hash(name, role, email);
     }
+
 }

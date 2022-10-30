@@ -1,0 +1,55 @@
+.wallpaperImage {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.labelform {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.labelCheckBox {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.titlecreate {
+  justify-content: center;
+  display: flex;
+  color: white;
+  font-weight: bold;
+}
+
+.formadd {
+  margin-top: 20px;
+  padding: 40px;
+  width: 55vw;
+  margin-left: 25vw;
+  background-image: linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97));
+  height: auto;
+}
+
+.adduserbtn {
+  width: 51vw;
+  margin: 0px;
+  margin-top: 25px;
+}
+
+.alertText {
+  margin: auto;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-color: #bee5eb;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.checkbox {
+  margin-top: 15px;
+  margin-left: 20px;
+}

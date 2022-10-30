@@ -27,8 +27,8 @@ public class User  implements Serializable{
 
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "address", nullable = true)
-    private String address;
+    @Column(name = "role", nullable = true)
+    private String role;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -66,12 +66,12 @@ public class User  implements Serializable{
         this.surname = surname;
     }
 
-    public String getAddress() {
-        return address;
+    public String getRole() {
+        return role;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setRole(String address) {
+        this.role = address;
     }
 
     public String getEmail() {return email;}
