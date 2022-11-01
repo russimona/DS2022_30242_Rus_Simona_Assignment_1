@@ -37,6 +37,14 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public UUID findUserByNameAndPassword(String email, String password){
+        Optional<User> prosumerOptional = userRepository.findUserByEmailAndPassword(email, password);
+        if (!prosumerOptional.isPresent()) {
+            LOGGER.error("User with email {} was not found in db", email);
+            throw new ResourceNotFoundException(User.class.getSimpleName() + " with email: " + email);
+        }
+        return UserBuilder.toUserDetailsDTO(prosumerOptional.get()).getId();
+    }
     public UserDetailsDTO findUserById(UUID id) {
         Optional<User> prosumerOptional = userRepository.findById(id);
         if (!prosumerOptional.isPresent()) {

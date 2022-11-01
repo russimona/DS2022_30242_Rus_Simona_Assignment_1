@@ -39,7 +39,12 @@ public class UserController {
         }
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
-
+    
+    @GetMapping(value = "/login")
+    public ResponseEntity<UUID> getUserByEmailAndPassword(@Valid @RequestBody String email, @Valid @RequestBody String password) {
+        UUID dto = userService.findUserByNameAndPassword(email, password);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
     @PostMapping()
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody UserDetailsDTO userDTO) {
         UUID userID = userService.insert(userDTO);
@@ -67,7 +72,7 @@ public class UserController {
     public ResponseEntity<?> updateDevices(@RequestBody @PathVariable("id_user") UUID userId, @PathVariable("id_device") UUID deviceId ) {
         return new ResponseEntity<>(userService.updateDevices(userId, deviceId), HttpStatus.OK);
     }
-  
+
     @PostMapping(value = "/delete/{id_user}/{id_device}")
     public ResponseEntity<?> deleteDevice(@RequestBody @PathVariable("id_user") UUID userId, @PathVariable("id_device") UUID deviceId ) {
         return new ResponseEntity<>(userService.deleteDevice(userId, deviceId), HttpStatus.OK);
