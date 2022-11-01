@@ -24,9 +24,9 @@ public class UserControllerUnitTest extends Ds2020TestConfig {
     public void insertUserTest() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         //String name, String surname, String address, String email, String password
-        UserDetailsDTO userDTO = new UserDetailsDTO("John", "Doe","Location", "john@doe.com","password");
+        UserDetailsDTO userDTO = new UserDetailsDTO("John", "Doe","Admin", "john@doe.com","password");
 
-        mockMvc.perform(post("/user")
+        mockMvc.perform(post("/users")
                 .content(objectMapper.writeValueAsString(userDTO))
                 .contentType("application/json"))
                 .andExpect(status().isCreated());
@@ -35,9 +35,9 @@ public class UserControllerUnitTest extends Ds2020TestConfig {
     @Test
     public void insertUserTestFailsDueNullPassword() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        UserDetailsDTO userDTO = new UserDetailsDTO("John", "Doe","Location", "john@doe.com",null);
+        UserDetailsDTO userDTO = new UserDetailsDTO("John", "Doe","Admin", "john@doe.com",null);
 
-        mockMvc.perform(post("/user")
+        mockMvc.perform(post("/users")
                 .content(objectMapper.writeValueAsString(userDTO))
                 .contentType("application/json"))
                 .andExpect(status().isBadRequest());
@@ -46,9 +46,8 @@ public class UserControllerUnitTest extends Ds2020TestConfig {
     @Test
     public void insertUserTestFailsDueToNullSurname() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        UserDetailsDTO userDTO = new UserDetailsDTO("John", null,"Location", "john@doe.com","password");
-
-        mockMvc.perform(post("/user")
+        UserDetailsDTO userDTO = new UserDetailsDTO("John", null,"Admin", "john@doe.com","password");
+        mockMvc.perform(post("/users")
                 .content(objectMapper.writeValueAsString(userDTO))
                 .contentType("application/json"))
                 .andExpect(status().isBadRequest());

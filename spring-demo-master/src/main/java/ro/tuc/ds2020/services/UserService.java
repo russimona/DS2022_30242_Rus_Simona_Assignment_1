@@ -8,7 +8,9 @@ import ro.tuc.ds2020.controllers.handlers.exceptions.model.ResourceNotFoundExcep
 import ro.tuc.ds2020.dtos.UserDTO;
 import ro.tuc.ds2020.dtos.UserDetailsDTO;
 import ro.tuc.ds2020.dtos.builders.UserBuilder;
+import ro.tuc.ds2020.entities.Device;
 import ro.tuc.ds2020.entities.User;
+import ro.tuc.ds2020.repositories.DeviceRepository;
 import ro.tuc.ds2020.repositories.UserRepository;
 
 import java.util.List;
@@ -20,10 +22,12 @@ import java.util.stream.Collectors;
 public class UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final DeviceRepository deviceRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, DeviceRepository deviceRepository) {
         this.userRepository = userRepository;
+        this.deviceRepository = deviceRepository;
     }
 
     public List<UserDTO> findUsers() {
@@ -86,6 +90,46 @@ public class UserService {
         userRepository.save(user);
 
         return userDTO.getId();
+    }
+
+    public UUID updateDevices(UUID userId, UUID deviceId) {
+        Optional<Device> prosumerOptionalDevice = deviceRepository.findById(deviceId);
+        Optional<User> prosumerOptional = userRepository.findById(userId);
+        if (!prosumerOptional.isPresent()) {
+            LOGGER.error("User with id {} was not found in db", userId);
+            throw new ResourceNotFoundException(User.class.getSimpleName() + " with id: " + userId);
+        }
+
+        User user = prosumerOptional.get();
+        Device device = prosumerOptionalDevice.get();
+        List<Device> finalDevices = user.getDeviceList();
+        finalDevices.add(device);
+
+        if (deviceId !=null){
+            user.setDeviceList(finalDevices);
+        }
+
+        return deviceId;
+    }
+
+    public UUID deleteDevice(UUID userId, UUID deviceId) {
+        Optional<Device> prosumerOptionalDevice = deviceRepository.findById(deviceId);
+        Optional<User> prosumerOptional = userRepository.findById(userId);
+        if (!prosumerOptional.isPresent()) {
+            LOGGER.error("User with id {} was not found in db", userId);
+            throw new ResourceNotFoundException(User.class.getSimpleName() + " with id: " + userId);
+        }
+
+        User user = prosumerOptional.get();
+        Device device = prosumerOptionalDevice.get();
+        List<Device> finalDevices = user.getDeviceList();
+        finalDevices.remove(device);
+
+        if (deviceId !=null){
+            user.setDeviceList(finalDevices);
+        }
+
+        return deviceId;
     }
 
 }

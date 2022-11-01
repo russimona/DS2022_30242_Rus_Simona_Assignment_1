@@ -34,7 +34,6 @@ public class Device {
     @JoinColumn(name="id_user")
     private User user;
 
-
     public Device () {
 
     }

@@ -19,7 +19,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserController {
 
     private final UserService userService;
@@ -60,11 +60,16 @@ public class UserController {
 
     @PostMapping(value = "/update")
     public ResponseEntity<?> updateProsumer(@RequestBody @Valid  UserDetailsDTO userDTO) {
-
         return new ResponseEntity<>(userService.updateUser(userDTO), HttpStatus.OK);
-
-
     }
-    //TODO: UPDATE, DELETE per resource
 
+    @PostMapping(value = "/update/{id_user}/{id_device}")
+    public ResponseEntity<?> updateDevices(@RequestBody @PathVariable("id_user") UUID userId, @PathVariable("id_device") UUID deviceId ) {
+        return new ResponseEntity<>(userService.updateDevices(userId, deviceId), HttpStatus.OK);
+    }
+  
+    @PostMapping(value = "/delete/{id_user}/{id_device}")
+    public ResponseEntity<?> deleteDevice(@RequestBody @PathVariable("id_user") UUID userId, @PathVariable("id_device") UUID deviceId ) {
+        return new ResponseEntity<>(userService.deleteDevice(userId, deviceId), HttpStatus.OK);
+    }
 }

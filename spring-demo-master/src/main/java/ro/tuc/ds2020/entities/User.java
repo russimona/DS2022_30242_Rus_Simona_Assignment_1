@@ -33,7 +33,7 @@ public class User  implements Serializable{
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Device> itemList;
+    private List<Device> deviceList;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -43,8 +43,21 @@ public class User  implements Serializable{
     public User() {
     }
 
-    public User(String name, String surname, String email, String address, String password) {
+    public User(String name, String surname, String email, String role,String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.role = role;
+        this.password = password;
+    }
 
+    public User(String name, String surname, String email, String role,String password, List<Device> devices) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.role = role;
+        this.password = password;
+        this.deviceList = devices;
     }
 
     public UUID getId() {
@@ -86,4 +99,12 @@ public class User  implements Serializable{
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    public List<Device> getDeviceList() {
+        return deviceList;
+    }
+
+    public void setDeviceList(List<Device> deviceList) {
+        this.deviceList = deviceList;
+    }
 }
