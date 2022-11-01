@@ -3,25 +3,25 @@ package ro.tuc.ds2020.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ro.tuc.ds2020.entities.User;
+import ro.tuc.ds2020.entities.Device;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface DeviceRepository extends JpaRepository<Device, UUID> {
 
     /**
      * Example: JPA generate Query by Field
      */
-    List<User> findByName(String name);
+    List<Device> findByName(String name);
 
     /**
      * Example: Write Custom Query
      */
-    @Query(value = "SELECT u " +
-            "FROM User u " +
-            "WHERE u.email = :email and u.password = :password "
+    @Query(value = "SELECT d " +
+            "FROM Device d " +
+            "WHERE d.manufacturer = :manufacturer "
             )
-    Optional<User> findUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+    Optional<Device> findDeviceByManufacturer(@Param("manufacturer") String manufacturer);
 }

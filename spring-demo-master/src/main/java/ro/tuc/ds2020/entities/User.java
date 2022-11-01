@@ -6,9 +6,11 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name="users")
 public class User  implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -29,6 +31,9 @@ public class User  implements Serializable{
     private String email;
     @Column(name = "role", nullable = true)
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Device> itemList;
 
     @Column(name = "password", nullable = false)
     private String password;

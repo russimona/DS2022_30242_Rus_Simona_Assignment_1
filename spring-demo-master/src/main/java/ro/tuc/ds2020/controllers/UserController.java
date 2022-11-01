@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<UUID> insertUser(@Valid @RequestBody UserDetailsDTO userDTO) {
+    public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody UserDetailsDTO userDTO) {
         UUID userID = userService.insert(userDTO);
         return new ResponseEntity<>(userID, HttpStatus.CREATED);
     }
@@ -52,8 +52,19 @@ public class UserController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<UUID> deleteProsumer(@PathVariable("id") UUID userId){
+        userService.deletUserById(userId);
+        return new ResponseEntity<>(userId, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<?> updateProsumer(@RequestBody @Valid  UserDetailsDTO userDTO) {
+
+        return new ResponseEntity<>(userService.updateUser(userDTO), HttpStatus.OK);
 
 
+    }
     //TODO: UPDATE, DELETE per resource
 
 }

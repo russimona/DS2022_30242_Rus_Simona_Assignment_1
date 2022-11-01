@@ -49,4 +49,43 @@ public class UserService {
         return user.getId();
     }
 
+    public void deletUserById(UUID id){
+        Optional<User> prosumerOptional = userRepository.findById(id);
+        if (!prosumerOptional.isPresent()) {
+            LOGGER.error("User with id {} was not found in db", id);
+            throw new ResourceNotFoundException(User.class.getSimpleName() + " with id: " + id);
+        }
+
+        userRepository.delete(prosumerOptional.get());
+    }
+
+    public UUID updateUser(UserDetailsDTO userDTO) {
+        Optional<User> prosumerOptional = userRepository.findById(userDTO.getId());
+        if (!prosumerOptional.isPresent()) {
+            LOGGER.error("User with id {} was not found in db", userDTO.getId());
+            throw new ResourceNotFoundException(User.class.getSimpleName() + " with id: " + userDTO.getId());
+        }
+
+        User user = prosumerOptional.get();
+
+        if (userDTO.getName() !=null){
+            user.setName(userDTO.getName());
+        }
+        if (userDTO.getSurname() !=null){
+            user.setSurname(userDTO.getSurname());
+        }
+        if (userDTO.getEmail() !=null){
+            user.setEmail(userDTO.getEmail());
+        }
+        if(userDTO.getPassword()!=null){
+            user.setPassword(userDTO.getPassword());
+        }
+        if(userDTO.getRole()!=null){
+            user.setRole(userDTO.getRole());
+        }
+        userRepository.save(user);
+
+        return userDTO.getId();
+    }
+
 }

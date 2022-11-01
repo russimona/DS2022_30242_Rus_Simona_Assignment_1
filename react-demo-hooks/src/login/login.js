@@ -17,9 +17,12 @@ const Login = () => {
 
   const handleChange = (event) => {
     if (event.target.name === "email") {
+      sessionStorage.setItem('email', event.target.value)
       setEmail(event.target.value);
     }
     if (event.target.name === "password") {
+      const email = sessionStorage.getItem('email');
+      console.log(email);
       setPassword(event.target.value);
     }
   };
