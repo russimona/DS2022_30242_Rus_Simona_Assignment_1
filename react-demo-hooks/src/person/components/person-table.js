@@ -8,25 +8,40 @@ const columns = [
         accessor: 'name',
     },
     {
-        Header: 'Age',
-        accessor: 'age',
+        Header: 'Surname',
+        accessor: 'surname',
+    },
+    {
+        Header: 'Email',
+        accessor: 'email',
     }
 ];
 
 const filters = [
     {
         accessor: 'name',
+    },
+
+    {
+        accessor: 'surname',
+    },
+    {
+        accessor: 'email',
     }
 ];
 
 function PersonTable(props) {
     return (
-        <Table
-            data={props.tableData}
-            columns={columns}
-            search={filters}
-            pageSize={5}
-        />
+        <div style={{width : '90vw', margin : 'auto', backgroundColor:'transparent' }}>
+            <Table
+                data={props.tableData}
+                columns={columns}
+                search={filters}
+                pageSize={5}
+                onRowClick={(row) => console.log(row.original)} />
+
+        </div>
+
     );
 }
 

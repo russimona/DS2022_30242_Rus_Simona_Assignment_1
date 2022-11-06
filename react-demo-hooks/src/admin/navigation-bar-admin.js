@@ -19,7 +19,10 @@ const textStyle = {
 };
 
 const logoutHandler = () => {
-  window.location.href = "/login";
+  if(sessionStorage.getItem('sessionToken'))
+    sessionStorage.removeItem('sessionToken');
+
+  window.location.href = "/";
 };
 
 function NavigationBar() {

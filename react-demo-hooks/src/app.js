@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //components
-import Home from "./home/home";
 import PersonContainer from "./person/person-container";
 import ErrorPage from "./commons/errorhandling/error-page";
 import Login from "./login/login";
@@ -22,11 +21,10 @@ function App() {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/login" render={() => <Login />} />
 
             <Route exact path="/admin" render={() => <AdminHome />} />
 
-            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/" render={() => <Login />} />
 
             <Route exact path="/person" render={() => <PersonContainer />} />
 
@@ -35,6 +33,8 @@ function App() {
             <Route exact path="/admin/add-device" render={() => <AddDevice />} />
 
             <Route exact path="/admin/users-table" render= {()=> <UsersTable/>} />
+            <Route exact path="/consumption" render= {()=> <AdminHome/>} />
+
 
             {/*Error*/}
             <Route exact path="/error" render={() => <ErrorPage />} />

@@ -11,6 +11,7 @@ import ro.tuc.ds2020.dtos.UserDetailsDTO;
 import ro.tuc.ds2020.services.UserService;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -41,13 +42,17 @@ public class UserController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/userByEmailPass")
-    public ResponseEntity<String> getUserByEmailAndPassword(@Valid @RequestBody Map<String, String> json) {
+    @PostMapping(value = "/userByEmailPass")
+    public ResponseEntity<HashMap> getUserByEmailAndPassword(@Valid @RequestBody Map<String, String> json) {
+
         System.out.println(json);
         String email = json.get("email");
         String password = json.get("password");
         String dto = userService.findUserByNameAndPassword(email, password);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        System.out.println(dto);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id", dto);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
     @PostMapping()
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody UserDetailsDTO userDTO) {

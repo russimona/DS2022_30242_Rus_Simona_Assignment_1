@@ -15,10 +15,17 @@ const Login = () => {
 
     validateInput();
 
-    return loginUser(email, password, (result, status, err) => {
+    loginUser(email, password, (result, status, err) => {
         if (result !== null && (status === 200 || status === 201)) {
-          //alert("Successfully inserted person with id: " + result);
-
+          console.log(result.id)
+          if(result.id.includes("admin")){
+            const uid = result.id.replace("admin", "9999999")
+            sessionStorage.setItem('sessionToken', uid)
+            window.location.href = '/admin';
+          }else{
+            window.location.href='/consumption';
+            sessionStorage.setItem('sessionToken', result.id)
+          }
         } else {
           setIsAlert(true);
           setAlertMessage(
@@ -27,12 +34,14 @@ const Login = () => {
           console.log("error");
         }
     });
+
+
     };
 
 
   const handleChange = (event) => {
     if (event.target.name === "email") {
-      sessionStorage.setItem('email', event.target.value)
+
       setEmail(event.target.value);
     }
     if (event.target.name === "password") {
@@ -75,7 +84,7 @@ const Login = () => {
         </Label>
         <Input
           name="password"
-          type="text"
+          type="password"
           placeholder={"Password"}
           onChange={handleChange}
         />

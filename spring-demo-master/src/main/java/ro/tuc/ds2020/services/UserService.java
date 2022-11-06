@@ -40,12 +40,15 @@ public class UserService {
     public String findUserByNameAndPassword(String email, String password){
         Optional<User> prosumerOptionalEmail = userRepository.findByEmail(email);
         Optional<List<User>> prosumerOptionalPassword = userRepository.findByPassword(password);
+
         if (!prosumerOptionalEmail.isPresent() || !prosumerOptionalPassword.isPresent()) {
             LOGGER.error("User was not found in db", email);
             throw new ResourceNotFoundException(User.class.getSimpleName());
         }
+
         for(User u : prosumerOptionalPassword.get()) {
-            if (u.getEmail() == prosumerOptionalEmail.get().getEmail()) {
+            if (u.getEmail().equals(prosumerOptionalEmail.get().getEmail())) {
+                System.out.println("aici");
                 return UserBuilder.toUserDetailsDTO(u).getId()+UserBuilder.toUserDetailsDTO(u).getRole_user();
             }
         }

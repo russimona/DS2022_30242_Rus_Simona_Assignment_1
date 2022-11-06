@@ -31,8 +31,8 @@ const UsersTable = () => {
   }, []);
   return (
     <div
-      style={{ backgroundImage: `url(${wallpaper})` }}
-      className="wallpaperImage"
+        style={{ backgroundImage: `url(${wallpaper})` }}
+        className="wallpaperImage"
     >
       <NavigationBar />
       <CardHeader>

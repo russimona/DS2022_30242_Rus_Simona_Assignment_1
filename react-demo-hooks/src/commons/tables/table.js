@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { Col, Row } from "react-bootstrap";
 
-import Field from "./fields/Field";
+//others
+import add from '../../assets/add.png';
+import edit from '../../assets/edit.png';
+import delete_icon from '../../assets/delete.png';
+
 
 function Table(props) {
     const [data, setData] = useState(props.data);
@@ -13,86 +16,45 @@ function Table(props) {
     const [pageSize, setPageSize] = useState(props.pageSize || 10);
 
     const [, updateState] = React.useState();
-    const forceUpdate = React.useCallback(() => updateState({}), []);
 
-    function filter(data) {
-        let accepted = true;
 
-        filters.forEach(val => {
-            if (String(val.value) === "") {
-                accepted = true;
-            }
-
-            if (!String(data[val.accessor]).includes(String(val.value)) && !String(val.value).includes(String(data[val.accessor]))) {
-                accepted = false;
-            }
-        });
-
-        return accepted;
-    }
-
-    function handleChange(value, index, header) {
-        if (filters === undefined) {
-            setFilters((filters) => ([]));
-        }
-        let keep = value.target.value;
-
-        setFilters((filters) => {
-            let newFilters = JSON.parse(JSON.stringify(filters));
-
-            newFilters[index] = {
-                value: keep,
-                accessor: header
-            };
-
-            return newFilters;
-        });
-
-    }
-
-    function getTRPropsType(state, rowInfo) {
-        if (rowInfo) {
-            return {
-                style: {
-                    textAlign: "center"
-                }
-            };
-        }
-        else
-            return {};
-    }
-
+    console.log(data)
     return (
-        <div>
-            <Row>
+        <div style={{margin: "auto", marginTop:'30px', backgroundColor: '#b9ede8', padding:'20px'}}>
+
+
                 {
-                    search.map((header, index) => {
+                    data.map((user) => {
                         return (
-                            <Col key={index}>
-                                <div >
-                                    <Field id={header.accessor} label={header.accessor}
-                                        onChange={(e) => handleChange(e, index, header.accessor)} />
-                                </div>
-                            </Col>
+                            <Row key={user.id} >
+                                <Col>
+                                    <p style={{color: 'black'}}>{user.name}</p>
+                                </Col>
+                                <Col>
+                                    <p style={{color: 'black'}}>{user.surname}</p>
+                                </Col>
+                                <Col>
+                                    <p style={{color: 'black'}}>{user.email}</p>
+                                </Col>
+                               <Col>
+                                   <button style={{backgroundColor: 'transparent', border: 'none', color: 'white'}} onClick={()=>{
+                                       console.log(user.id)}}>
+                                       <img alt='add device' src={add} style={{height: '30px', width:"30px", }}/>
+                                   </button>
+                                   <button style={{backgroundColor: 'transparent', border: 'none'}} onClick={()=>{
+                                       console.log(user.id)}}>
+                                       <img alt='edit device' src={edit} style={{height: '30px', width:"30px"}}/>
+                                   </button>
+                                   <button style={{backgroundColor: 'transparent', border: 'none'}} onClick={()=>{
+                                       console.log(user.id)}}>
+                                       <img alt='delete device' src={delete_icon} style={{height: '30px', width:"30px"}}/>
+                                   </button>
+                               </Col>
+                            </Row>
                         )
                     })
                 }
-            </Row>
-            <Row>
-                <Col>
-                    <ReactTable
-                        data={data ? data.filter(data => filter(data)) : []}
-                        resolveData={data => data.map(row => row)}
-                        columns={columns}
-                        defaultPageSize={pageSize}
-                        getTrProps={getTRPropsType}
-                        showPagination={true}
-                        style={{
-                            height: '300px'
-                        }}
-                    />
-                </Col>
-            </Row>
+
         </div>
     );
 }
