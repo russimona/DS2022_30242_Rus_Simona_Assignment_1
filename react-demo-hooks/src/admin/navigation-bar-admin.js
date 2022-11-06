@@ -19,8 +19,8 @@ const textStyle = {
 };
 
 const logoutHandler = () => {
-  if(sessionStorage.getItem('sessionToken'))
-    sessionStorage.removeItem('sessionToken');
+  if (sessionStorage.getItem("sessionToken"))
+    sessionStorage.removeItem("sessionToken");
 
   window.location.href = "/";
 };
@@ -51,7 +51,9 @@ function NavigationBar() {
                 <NavLink href="/admin/show-device">Show device</NavLink>
               </DropdownItem>
               <DropdownItem>
-                <NavLink href="/admin/add-device-user">Add device for user</NavLink>
+                <NavLink href="/admin/add-device-user">
+                  Add device for user
+                </NavLink>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

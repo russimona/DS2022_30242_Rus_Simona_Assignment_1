@@ -50,11 +50,26 @@ function loginUser(email, password, callback) {
     RestApiClient.performRequest(request, callback);
 }
 
-
+function deleteUser(uid, callback) {
+  
+    RestApiClient.performRequest(request, callback);
+    console.log(uid);
+    let request = new Request(HOST.backend_api + endpoint.users + '/delete/'+uid, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+        },
+    });
+    console.log("URL: " + request.url);
+    RestApiClient.performRequest(request, callback);
+}
 
 export {
     getUsers,
     getUsersById,
     postUser,
-    loginUser
+    loginUser,
+    deleteUser
 };

@@ -31,17 +31,14 @@ const filters = [
 ];
 
 function PersonTable(props) {
+    
     return (
-        <div style={{width : '90vw', margin : 'auto', backgroundColor:'transparent' }}>
+        <div style={{width : '90vw', margin : 'auto', backgroundImage: 'linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97))' }}>
             <Table
                 data={props.tableData}
-                columns={columns}
-                search={filters}
-                pageSize={5}
-                onRowClick={(row) => console.log(row.original)} />
-
+                setReload={props.setReload}
+                />
         </div>
-
     );
 }
 
