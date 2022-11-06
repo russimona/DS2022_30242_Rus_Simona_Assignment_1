@@ -12,6 +12,7 @@ import AddDevice from "./admin/device/add/add-device";
 
 //others
 import styles from "./commons/styles/project-style.css";
+import UsersTable from "./admin/user/show/user-table";
 
 
 
@@ -32,6 +33,8 @@ function App() {
             <Route exact path="/admin/add-user" render={() => <AddUser />} />
 
             <Route exact path="/admin/add-device" render={() => <AddDevice />} />
+
+            <Route exact path="/admin/users-table" render= {()=> <UsersTable/>} />
 
             {/*Error*/}
             <Route exact path="/error" render={() => <ErrorPage />} />

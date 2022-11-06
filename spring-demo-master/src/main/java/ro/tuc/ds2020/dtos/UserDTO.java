@@ -9,7 +9,7 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     private UUID id;
     private String name;
     private String surname;
-    private String role;
+    private String role_user;
     private String email;
     private String password;
     /*
@@ -19,11 +19,11 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     public UserDTO() {
     }
 
-    public UserDTO(UUID id, String name, String surname, String role, String email, String password) {
+    public UserDTO(UUID id, String name, String surname, String role_user, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.role = role;
+        this.role_user = role_user;
         this.email = email;
         this.password = password;
     }
@@ -52,12 +52,12 @@ public class UserDTO extends RepresentationModel<UserDTO> {
         this.surname = surname;
     }
 
-    public String getRole() {
-        return role;
+    public String getRole_user() {
+        return role_user;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole_user(String role_user) {
+        this.role_user = role_user;
     }
 
     public String getEmail() {

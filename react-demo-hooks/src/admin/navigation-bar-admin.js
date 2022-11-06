@@ -42,7 +42,7 @@ function NavigationBar() {
                 <NavLink href="/admin/add-device">Add device</NavLink>
               </DropdownItem>
               <DropdownItem>
-                <NavLink href="/admin/show-user">Show user</NavLink>
+                <NavLink href="/admin/users-table">Show user</NavLink>
               </DropdownItem>
               <DropdownItem>
                 <NavLink href="/admin/show-device">Show device</NavLink>

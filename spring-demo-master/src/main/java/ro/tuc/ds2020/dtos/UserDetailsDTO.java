@@ -13,7 +13,7 @@ public class UserDetailsDTO {
 
     @NotNull
     private String surname;
-    private String role;
+    private String role_user;
 
     @NotNull
     private String email;
@@ -24,19 +24,19 @@ public class UserDetailsDTO {
     public UserDetailsDTO() {
     }
 
-    public UserDetailsDTO(String name, String surname, String role, String email, String password) {
+    public UserDetailsDTO(String name, String surname, String role_user, String email, String password) {
         this.name = name;
         this.surname = surname;
-        this.role = role;
+        this.role_user = role_user;
         this.email = email;
         this.password = password;
     }
 
-    public UserDetailsDTO(UUID id, String name, String surname, String role, String email, String password) {
+    public UserDetailsDTO(UUID id, String name, String surname, String role_user, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.role = role;
+        this.role_user = role_user;
         this.email = email;
         this.password = password;
     }
@@ -57,12 +57,12 @@ public class UserDetailsDTO {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
+    public String getRole_user() {
+        return role_user;
     }
 
-    public void setRole(String address) {
-        this.role = role;
+    public void setRole_user(String role_user) {
+        this.role_user = role_user;
     }
 
     public String getSurname() {
@@ -96,12 +96,12 @@ public class UserDetailsDTO {
         UserDetailsDTO that = (UserDetailsDTO) o;
         return email == that.email &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(role, that.role);
+                Objects.equals(role_user, that.role_user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, role, email);
+        return Objects.hash(name, role_user, email);
     }
 
 }

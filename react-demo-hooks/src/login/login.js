@@ -4,6 +4,7 @@ import { FormGroup, Input, Label, Button } from "reactstrap";
 //others
 import wallpaper from "../assets/register_page.jpg";
 import "./login.css";
+import {loginUser} from "../person/api/user-api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,9 +12,23 @@ const Login = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [isAlert, setIsAlert] = useState(false);
   const loginHandler = () => {
+
     validateInput();
-   // window.location.href = "/";
-  };
+
+    return loginUser(email, password, (result, status, err) => {
+        if (result !== null && (status === 200 || status === 201)) {
+          //alert("Successfully inserted person with id: " + result);
+
+        } else {
+          setIsAlert(true);
+          setAlertMessage(
+              "Error trying to login. Invalid credentials."
+          );
+          console.log("error");
+        }
+    });
+    };
+
 
   const handleChange = (event) => {
     if (event.target.name === "email") {

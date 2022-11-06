@@ -29,8 +29,8 @@ public class User  implements Serializable{
 
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "role", nullable = true)
-    private String role;
+    @Column(name = "role_user", nullable = false)
+    private String role_user;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Device> deviceList;
@@ -43,19 +43,19 @@ public class User  implements Serializable{
     public User() {
     }
 
-    public User(String name, String surname, String email, String role,String password) {
+    public User(String name, String surname, String email, String role_user,String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.role = role;
+        this.role_user = role_user;
         this.password = password;
     }
 
-    public User(String name, String surname, String email, String role,String password, List<Device> devices) {
+    public User(String name, String surname, String email, String role_user,String password, List<Device> devices) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.role = role;
+        this.role_user = role_user;
         this.password = password;
         this.deviceList = devices;
     }
@@ -84,12 +84,12 @@ public class User  implements Serializable{
         this.surname = surname;
     }
 
-    public String getRole() {
-        return role;
+    public String getRole_user() {
+        return role_user;
     }
 
-    public void setRole(String address) {
-        this.role = address;
+    public void setRole_user(String address) {
+        this.role_user = address;
     }
 
     public String getEmail() {return email;}

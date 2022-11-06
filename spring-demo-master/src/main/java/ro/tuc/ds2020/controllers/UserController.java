@@ -12,6 +12,7 @@ import ro.tuc.ds2020.services.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -39,10 +40,13 @@ public class UserController {
         }
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
-    
-    @GetMapping(value = "/login")
-    public ResponseEntity<UUID> getUserByEmailAndPassword(@Valid @RequestBody String email, @Valid @RequestBody String password) {
-        UUID dto = userService.findUserByNameAndPassword(email, password);
+
+    @GetMapping(value = "/userByEmailPass")
+    public ResponseEntity<String> getUserByEmailAndPassword(@Valid @RequestBody Map<String, String> json) {
+        System.out.println(json);
+        String email = json.get("email");
+        String password = json.get("password");
+        String dto = userService.findUserByNameAndPassword(email, password);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
     @PostMapping()

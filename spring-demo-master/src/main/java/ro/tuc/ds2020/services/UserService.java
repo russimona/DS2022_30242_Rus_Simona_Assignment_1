@@ -37,14 +37,21 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UUID findUserByNameAndPassword(String email, String password){
-        Optional<User> prosumerOptional = userRepository.findUserByEmailAndPassword(email, password);
-        if (!prosumerOptional.isPresent()) {
-            LOGGER.error("User with email {} was not found in db", email);
-            throw new ResourceNotFoundException(User.class.getSimpleName() + " with email: " + email);
+    public String findUserByNameAndPassword(String email, String password){
+        Optional<User> prosumerOptionalEmail = userRepository.findByEmail(email);
+        Optional<List<User>> prosumerOptionalPassword = userRepository.findByPassword(password);
+        if (!prosumerOptionalEmail.isPresent() || !prosumerOptionalPassword.isPresent()) {
+            LOGGER.error("User was not found in db", email);
+            throw new ResourceNotFoundException(User.class.getSimpleName());
         }
-        return UserBuilder.toUserDetailsDTO(prosumerOptional.get()).getId();
+        for(User u : prosumerOptionalPassword.get()) {
+            if (u.getEmail() == prosumerOptionalEmail.get().getEmail()) {
+                return UserBuilder.toUserDetailsDTO(u).getId()+UserBuilder.toUserDetailsDTO(u).getRole_user();
+            }
+        }
+       return "";
     }
+
     public UserDetailsDTO findUserById(UUID id) {
         Optional<User> prosumerOptional = userRepository.findById(id);
         if (!prosumerOptional.isPresent()) {
@@ -63,12 +70,13 @@ public class UserService {
 
     public void deletUserById(UUID id){
         Optional<User> prosumerOptional = userRepository.findById(id);
+
         if (!prosumerOptional.isPresent()) {
             LOGGER.error("User with id {} was not found in db", id);
             throw new ResourceNotFoundException(User.class.getSimpleName() + " with id: " + id);
         }
 
-        userRepository.delete(prosumerOptional.get());
+        userRepository.deleteById(id);
     }
 
     public UUID updateUser(UserDetailsDTO userDTO) {
@@ -92,8 +100,8 @@ public class UserService {
         if(userDTO.getPassword()!=null){
             user.setPassword(userDTO.getPassword());
         }
-        if(userDTO.getRole()!=null){
-            user.setRole(userDTO.getRole());
+        if(userDTO.getRole_user()!=null){
+            user.setRole_user(userDTO.getRole_user());
         }
         userRepository.save(user);
 
