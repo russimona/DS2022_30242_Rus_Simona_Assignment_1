@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CardHeader } from "reactstrap";
 
 //components
-import PersonTable from "./person-table";
+import Table from "./table";
 import NavigationBar from "../../navigation-bar-admin";
 //actions
 import { getUsers } from "../../../commons/api/user-api";
@@ -33,6 +33,8 @@ const UsersTable = () => {
   useEffect(() => {
     reload === true && fetchPersons();
   }, [reload]);
+
+
   return (
     <div
       style={{ backgroundImage: `url(${wallpaper})` }}
@@ -42,7 +44,12 @@ const UsersTable = () => {
       <CardHeader>
         <strong style={{color : 'white'}}> Users List </strong>
       </CardHeader>
-      {isLoaded && <PersonTable tableData={tableData} setReload={setReload} />}
+      {isLoaded &&  <div style={{width : '90vw', margin : 'auto', backgroundImage: 'linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97))' }}>
+            <Table
+                data={tableData}
+                setReload={setReload}
+                />
+        </div>}
     </div>
   );
 };

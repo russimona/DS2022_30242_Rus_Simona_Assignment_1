@@ -9,7 +9,6 @@ import wallpaper from "../../../assets/register_page.jpg";
 import NavigationBar from "../../navigation-bar-admin";
 import "./add-user.css";
 
-
 const AddUser = () => {
   const [checkboxAdmin, setCheckboxAdmin] = useState(false);
   const [checkboxUser, setCheckboxUser] = useState(false);
@@ -26,13 +25,15 @@ const AddUser = () => {
     role_user: "",
   });
 
-  useEffect(()=>{if(sessionStorage.getItem('sessionToken')){
-    const uid = sessionStorage.getItem('sessionToken');
-    if(!uid.includes('9999999')){
-      window.location.href='/'
+  useEffect(() => {
+    if (sessionStorage.getItem("sessionToken")) {
+      const uid = sessionStorage.getItem("sessionToken");
+      if (!uid.includes("9999999")) {
+        window.location.href = "/";
+      }
     }
-  }}, [])
-  
+  }, []);
+
   useEffect(() => {
     if (checkboxAdmin === true) {
       setRole_user("admin");
@@ -65,8 +66,7 @@ const AddUser = () => {
     console.log(user);
     return postUser(user, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
-        alert("Successfully inserted person with id: " + result);
-        
+        window.location.href = "/admin/users-table";
       } else {
         alert(
           "Error trying to add user. Please check all the fields to be completed."

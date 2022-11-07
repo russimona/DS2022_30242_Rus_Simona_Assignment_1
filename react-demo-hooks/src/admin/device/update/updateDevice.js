@@ -1,32 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 //actions
-import { getUsersById, editUser } from "../../../commons/api/user-api";
+import { getDevicesById, editDevice } from "../../../commons/api/device-api";
 
 //others
 import wallpaper from "../../../assets/blue.png";
 import NavigationBar from "../../navigation-bar-admin";
-const UpdateUser = () => {
+const UpdateDevice = () => {
   const [editUid, setEditUid] = useState("");
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const onChangeHandler = (event) => {
-    if (event.target.name === "Name") {
-      setName(event.target.value);
-    }
-    if (event.target.name === "Surname") {
-      setSurname(event.target.value);
-    }
-    if (event.target.name === "Email") {
-      setEmail(event.target.value);
-    }
-    if (event.target.name === "Password") {
-      setPassword(event.target.value);
-    }
-  };
+  const [name, setName] = useState('');
+  const [manufacturer, setManufacturer] = useState('');
+  const [year_manufacture, setYear_manufacture] = useState(0);
+  const [id_consumption, setId_consumption] = useState(0)
 
   useEffect(() => {
     if (sessionStorage.getItem("sessionToken")) {
@@ -37,20 +22,35 @@ const UpdateUser = () => {
     }
   }, []);
 
+  const onChangeHandler = (event) => {
+    if (event.target.name === "mame") {
+      setName(event.target.value);
+    }
+    if (event.target.name === "manufacturer") {
+      setManufacturer(event.target.value);
+    }
+    if (event.target.name === "year_manufacture") {
+      setYear_manufacture(event.target.value);
+    }
+    if(event.target.name=== 'id_consumption'){
+      setId_consumption(event.target.value);
+    }
+  };
+
   useEffect(() => {
     if (sessionStorage.getItem("editUId")) {
       setEditUid(sessionStorage.getItem("editUId"));
     }
   }, []);
 
-  function fetchPersons() {
-    getUsersById(editUid, (result, status, err) => {
+  function fetchDevices() {
+    getDevicesById(editUid, (result, status, err) => {
       if (result !== null && status === 200) {
         //console.log(result);
         setName(result.name);
-        setEmail(result.email);
-        setPassword(result.password);
-        setSurname(result.surname);
+        setManufacturer(result.manufacturer);
+        setYear_manufacture(result.year_manufacture);
+        setId_consumption(result.consumption);
       } else {
         alert("Could not fetch data.");
       }
@@ -60,32 +60,28 @@ const UpdateUser = () => {
   useEffect(() => {
     if (editUid !== "") {
       console.log(editUid);
-      fetchPersons();
+      fetchDevices();
     }
     //eslint-disable-next-line
   }, [editUid]);
 
-  const editUserHandler = () => {
-    console.log({
-      name: name,
-      email: email,
-      password: password,
-      surname: surname,
-    });
-    return editUser(
+  const editDeviceHandler = () => {
+   
+    return editDevice(
       {
         id: editUid,
         name: name,
-        email: email,
-        password: password,
-        surname: surname,
+        manufacturer: manufacturer,
+        year_manufacture: year_manufacture,
+        id_consumption: id_consumption,
       },
       (result, status, err) => {
         if (result !== null && (status === 200 || status === 201)) {
-          window.location.href = "/admin/users-table";
           sessionStorage.removeItem("editUId")
+          window.location.href = "/admin/show-device";
+
         } else {
-          alert("Error trying to edit user.");
+          alert("Error trying to edit device.");
         }
       }
     );
@@ -98,7 +94,7 @@ const UpdateUser = () => {
     >
       <NavigationBar />
       <FormGroup className="formadd">
-        <h3 className="titlecreate">Edit user</h3>
+        <h3 className="titlecreate">Edit Device</h3>
         <Label className="labelform" for="emailField">
           Name
         </Label>
@@ -110,37 +106,37 @@ const UpdateUser = () => {
           value={name}
         />
         <Label className="labelform" for="passwordField">
-          Surname
+          Manufacturer
         </Label>
         <Input
-          name="Surname"
+          name="manufacturer"
           type="text"
-          placeholder={"Surname"}
+          placeholder={"manufacturer"}
           onChange={onChangeHandler}
-          value={surname}
+          value={manufacturer}
         />
         <Label className="labelform" for="emailField">
-          Email
+          Year of Manufacture
         </Label>
         <Input
-          name="Email"
+          name="year_manufacture"
           type="text"
-          placeholder={"Email"}
+          placeholder={"year_manufacture"}
           onChange={onChangeHandler}
-          value={email}
+          value={year_manufacture}
         />
         <Label className="labelform" for="passwordField">
-          Password
+          Id consumption
         </Label>
         <Input
-          name="Password"
+          name="id_consumption"
           type="text"
           placeholder={"Password"}
           onChange={onChangeHandler}
-          value={password}
+          value={id_consumption}
         />
 
-        <Button color="info" className="adduserbtn" onClick={editUserHandler}>
+        <Button color="info" className="adduserbtn" onClick={editDeviceHandler}>
           Confirm changes
         </Button>
       </FormGroup>
@@ -148,4 +144,4 @@ const UpdateUser = () => {
   );
 };
 
-export default UpdateUser;
+export default UpdateDevice;

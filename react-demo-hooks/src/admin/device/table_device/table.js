@@ -3,21 +3,19 @@ import "react-table/react-table.css";
 import { Col, Row } from "react-bootstrap";
 
 //actions
-import { deleteUser } from "../../../commons/api/user-api";
+import { deleteDevice } from "../../../commons/api/device-api";
 
 //others
 import edit from "../../../assets/edit.png";
 import delete_icon from "../../../assets/delete.png";
 
 function Table({ data, setReload }) {
-  const deleteUserHandler = (uid) => {
-    return deleteUser(uid, (result, status, err) => {
+  const deleteDeviceHandler = (uid) => {
+    return deleteDevice(uid, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
         setReload(true);
       } else {
-        alert(
-          "Error trying to add user. Please check all the fields to be completed."
-        );
+        alert("Error trying to add device");
         console.log("error");
       }
     });
@@ -42,35 +40,42 @@ function Table({ data, setReload }) {
           <p style={{ fontWeight: "bolder" }}>NAME</p>
         </Col>
         <Col>
-          <p style={{ fontWeight: "bolder" }}>SURNAME</p>
+          <p style={{ fontWeight: "bolder" }}>MANUFACTURER</p>
         </Col>
         <Col>
-          <p style={{ fontWeight: "bolder" }}>EMAIL</p>
+          <p style={{ fontWeight: "bolder" }}>YEAR OF MANUFACTURE</p>
+        </Col>
+        <Col>
+          <p style={{ fontWeight: "bolder" }}>ID CONSUMPTION</p>
         </Col>
         <Col>
           <p style={{ fontWeight: "bolder" }}>EDIT DELETE</p>
         </Col>
+        
       </Row>
-      {data.map((user) => {
+      {data.map((device) => {
         return (
-          <Row key={user.id}>
+          <Row key={device.id}>
             <Col>
-              <p style={{ color: "black" }}>{user.name}</p>
+              <p style={{ color: "black" }}>{device.name}</p>
             </Col>
             <Col>
-              <p style={{ color: "black" }}>{user.surname}</p>
+              <p style={{ color: "black" }}>{device.manufacturer}</p>
             </Col>
             <Col>
-              <p style={{ color: "black" }}>{user.email}</p>
+              <p style={{ color: "black" }}>{device.year_manufacture}</p>
+            </Col>
+            <Col>
+              <p style={{ color: "black" }}>{device.consumption}</p>
             </Col>
 
             <Col>
               <button
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
-                  sessionStorage.setItem("editUId", user.id);
-                  window.location.href = "/admin/update-users";
-                  console.log(user.id);
+                  sessionStorage.setItem("editUId", device.id);
+                  window.location.href = "/admin/update-devices";
+                  console.log(device.id);
                 }}
               >
                 <img
@@ -82,8 +87,8 @@ function Table({ data, setReload }) {
               <button
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
-                  console.log(user.id);
-                  deleteUserHandler(user.id);
+                  console.log(device.id);
+                  deleteDeviceHandler(device.id);
                 }}
               >
                 <img
@@ -94,7 +99,7 @@ function Table({ data, setReload }) {
               </button>
             </Col>
 
-          
+       
           </Row>
         );
       })}
