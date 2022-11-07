@@ -4,6 +4,8 @@ import { CardHeader } from "reactstrap";
 //components
 import NavigationBar from "../../navigation-bar-admin";
 import Table from "./table";
+import Login from "../../../login/login";
+
 //actions
 import { getDevices } from "../../../commons/api/device-api";
 
@@ -14,14 +16,6 @@ const DeviceTable = () => {
   const [reload, setReload] = useState(false);
   const [tableData, setTableData] = useState([]);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("sessionToken")) {
-      const uid = sessionStorage.getItem("sessionToken");
-      if (!uid.includes("9999999")) {
-        window.location.href = "/";
-      }
-    }
-  }, []);
 
   function fetchDevices() {
     return getDevices((result, status, err) => {
@@ -67,4 +61,4 @@ const DeviceTable = () => {
     </div>
   );
 };
-export default DeviceTable;
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   DeviceTable : Login;

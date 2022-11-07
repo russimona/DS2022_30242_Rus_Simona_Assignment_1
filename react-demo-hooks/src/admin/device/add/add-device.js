@@ -1,6 +1,9 @@
 import React, {useEffect, useState}  from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
+//components
+import Login from "../../../login/login";
+
 //others
 import wallpaper from "../../../assets/register_page.jpg";
 import { postDevice } from "../../../commons/api/device-api";
@@ -13,13 +16,6 @@ const AddDevice = () => {
   const [manufacturer, setManufacturer] = useState('');
   const [year_manufacture, setYear_manufacture] = useState(0);
   const [id_consumption] = useState(new Date().getMilliseconds());
-
-  useEffect(()=>{if(sessionStorage.getItem('sessionToken')){
-    const uid = sessionStorage.getItem('sessionToken');
-    if(!uid.includes('9999999')){
-      window.location.href='/'
-    }
-  }}, [])
 
   const onChangeHandler = (event) => {
     if (event.target.name === "mame") {
@@ -75,4 +71,4 @@ const AddDevice = () => {
   );
 };
 
-export default AddDevice
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   AddDevice : Login;

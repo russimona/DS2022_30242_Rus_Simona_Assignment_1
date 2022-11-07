@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
+
+//components
+import Login from "../../../login/login";
+
 //actions
 import { getUsersById, editUser } from "../../../commons/api/user-api";
 
@@ -28,14 +32,6 @@ const UpdateUser = () => {
     }
   };
 
-  useEffect(() => {
-    if (sessionStorage.getItem("sessionToken")) {
-      const uid = sessionStorage.getItem("sessionToken");
-      if (!uid.includes("9999999")) {
-        window.location.href = "/";
-      }
-    }
-  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem("editUId")) {
@@ -148,4 +144,4 @@ const UpdateUser = () => {
   );
 };
 
-export default UpdateUser;
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   UpdateUser : Login;

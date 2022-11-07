@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
+
+//components
+import Login from "../../../login/login";
+
 //actions
 import { getDevicesById, editDevice } from "../../../commons/api/device-api";
 
@@ -12,15 +16,6 @@ const UpdateDevice = () => {
   const [manufacturer, setManufacturer] = useState('');
   const [year_manufacture, setYear_manufacture] = useState(0);
   const [id_consumption, setId_consumption] = useState(0)
-
-  useEffect(() => {
-    if (sessionStorage.getItem("sessionToken")) {
-      const uid = sessionStorage.getItem("sessionToken");
-      if (!uid.includes("9999999")) {
-        window.location.href = "/";
-      }
-    }
-  }, []);
 
   const onChangeHandler = (event) => {
     if (event.target.name === "mame") {
@@ -59,7 +54,6 @@ const UpdateDevice = () => {
 
   useEffect(() => {
     if (editUid !== "") {
-      console.log(editUid);
       fetchDevices();
     }
     //eslint-disable-next-line
@@ -79,7 +73,6 @@ const UpdateDevice = () => {
         if (result !== null && (status === 200 || status === 201)) {
           sessionStorage.removeItem("editUId")
           window.location.href = "/admin/show-device";
-
         } else {
           alert("Error trying to edit device.");
         }
@@ -144,4 +137,4 @@ const UpdateDevice = () => {
   );
 };
 
-export default UpdateDevice;
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   UpdateDevice : Login;

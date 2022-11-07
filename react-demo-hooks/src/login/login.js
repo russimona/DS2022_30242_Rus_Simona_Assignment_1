@@ -12,9 +12,7 @@ const Login = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [isAlert, setIsAlert] = useState(false);
   const loginHandler = () => {
-
     validateInput();
-
     loginUser(email, password, (result, status, err) => {
         if (result !== null && (status === 200 || status === 201)) {
           console.log(result.id)
@@ -34,10 +32,7 @@ const Login = () => {
           console.log("error");
         }
     });
-
-
     };
-
 
   const handleChange = (event) => {
     if (event.target.name === "email") {
@@ -50,7 +45,6 @@ const Login = () => {
       setPassword(event.target.value);
     }
   };
-
 
   const validateInput = () => {
     if (email.length < 10 || password.length < 5) {

@@ -21,7 +21,6 @@ const textStyle = {
 const logoutHandler = () => {
   if (sessionStorage.getItem("sessionToken"))
     sessionStorage.removeItem("sessionToken");
-
   window.location.href = "/";
 };
 

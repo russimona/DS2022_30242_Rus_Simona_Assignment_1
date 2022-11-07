@@ -60,10 +60,6 @@ public class DeviceController {
 
     @PostMapping(value = "/update")
     public ResponseEntity<?> updateProsumer(@RequestBody @Valid  DeviceDetailsDTO deviceDTO) {
-
         return new ResponseEntity<>(deviceService.updateDevice(deviceDTO), HttpStatus.OK);
-
-
     }
-
 }

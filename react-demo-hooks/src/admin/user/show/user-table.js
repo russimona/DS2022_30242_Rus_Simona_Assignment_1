@@ -4,6 +4,7 @@ import { CardHeader } from "reactstrap";
 //components
 import Table from "./table";
 import NavigationBar from "../../navigation-bar-admin";
+import Login from "../../../login/login";
 //actions
 import { getUsers } from "../../../commons/api/user-api";
 
@@ -54,4 +55,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   UsersTable : Login;

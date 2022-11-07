@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
+//components
+import Login from "../../../login/login";
+
 //actions
 import { postUser } from "../../../commons/api/user-api";
 
@@ -25,14 +28,7 @@ const AddUser = () => {
     role_user: "",
   });
 
-  useEffect(() => {
-    if (sessionStorage.getItem("sessionToken")) {
-      const uid = sessionStorage.getItem("sessionToken");
-      if (!uid.includes("9999999")) {
-        window.location.href = "/";
-      }
-    }
-  }, []);
+ 
 
   useEffect(() => {
     if (checkboxAdmin === true) {
@@ -159,4 +155,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   AddUser : Login;
