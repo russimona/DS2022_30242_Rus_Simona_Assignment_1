@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "react-table/react-table.css";
 import { Col, Row } from "react-bootstrap";
 
+//actions
+import { deleteUser } from "../../../commons/api/user-api";
+
 //others
-import add from "../../assets/add.png";
-import edit from "../../assets/edit.png";
-import delete_icon from "../../assets/delete.png";
-import { deleteUser } from "../../person/api/user-api";
+import edit from "../../../assets/edit.png";
+import delete_icon from "../../../assets/delete.png";
 
-function Table({data, setReload}) {
- 
-
+function Table({ data, setReload }) {
   const deleteUserHandler = (uid) => {
     return deleteUser(uid, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
@@ -24,7 +23,9 @@ function Table({data, setReload}) {
     });
   };
 
-  useEffect(()=>{setReload(false)}, [])
+  useEffect(() => {
+    setReload(false);
+  }, [setReload]);
 
   console.log(data);
   return (
@@ -32,18 +33,27 @@ function Table({data, setReload}) {
       style={{
         margin: "auto",
         marginTop: "30px",
-        backgroundImage: 'linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97))' ,
+        backgroundImage: "linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97))",
         padding: "20px",
       }}
     >
-        <Row>
-            <Col><p style={{ fontWeight:'bolder'}}>NAME</p></Col>
-            <Col><p style={{ fontWeight:'bolder'}}>SURNAME</p></Col>
-            <Col><p style={{ fontWeight:'bolder'}}>EMAIL</p></Col>
-            <Col><p style={{ fontWeight:'bolder'}}>ADD DEVICE</p></Col>
-            <Col><p style={{ fontWeight:'bolder'}}>EDIT USER</p></Col>
-            <Col><p style={{ fontWeight:'bolder'}}>DELETE USER</p></Col>
-        </Row>
+      <Row>
+        <Col>
+          <p style={{ fontWeight: "bolder" }}>NAME</p>
+        </Col>
+        <Col>
+          <p style={{ fontWeight: "bolder" }}>SURNAME</p>
+        </Col>
+        <Col>
+          <p style={{ fontWeight: "bolder" }}>EMAIL</p>
+        </Col>
+        <Col>
+          <p style={{ fontWeight: "bolder" }}>EDIT USER</p>
+        </Col>
+        <Col>
+          <p style={{ fontWeight: "bolder" }}>DELETE USER</p>
+        </Col>
+      </Row>
       {data.map((user) => {
         return (
           <Row key={user.id}>
@@ -56,28 +66,13 @@ function Table({data, setReload}) {
             <Col>
               <p style={{ color: "black" }}>{user.email}</p>
             </Col>
+
             <Col>
               <button
-                style={{
-                  backgroundColor: "transparent",
-                  border: "none",
-                  color: "white",
-                }}
-                onClick={() => {
-                    console.log(user.id);
-                }}
-              >
-                <img
-                  alt="add device"
-                  src={add}
-                  style={{ height: "30px", width: "30px" }}
-                />
-              </button>
-            </Col>
-            <Col>
-            <button
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
+                  sessionStorage.setItem("editUId", user.id);
+                  window.location.href = "/admin/update-users";
                   console.log(user.id);
                 }}
               >
@@ -88,9 +83,9 @@ function Table({data, setReload}) {
                 />
               </button>
             </Col>
-           
+
             <Col>
-            <button
+              <button
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
                   console.log(user.id);
@@ -104,7 +99,6 @@ function Table({data, setReload}) {
                 />
               </button>
             </Col>
-           
           </Row>
         );
       })}

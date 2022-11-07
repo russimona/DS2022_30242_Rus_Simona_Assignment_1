@@ -65,6 +65,5 @@ public class DeviceController {
 
 
     }
-    //TODO: UPDATE, DELETE per resource
 
 }

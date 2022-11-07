@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { CardHeader } from "reactstrap";
 
 //components
-import PersonTable from "../../../person/components/person-table";
+import PersonTable from "./person-table";
 import NavigationBar from "../../navigation-bar-admin";
 //actions
-import { getUsers } from "../../../person/api/user-api";
+import { getUsers } from "../../../commons/api/user-api";
 
 //others
 import wallpaper from "../../../assets/register_page.jpg";
@@ -40,7 +40,7 @@ const UsersTable = () => {
     >
       <NavigationBar />
       <CardHeader>
-        <strong> Users List </strong>
+        <strong style={{color : 'white'}}> Users List </strong>
       </CardHeader>
       {isLoaded && <PersonTable tableData={tableData} setReload={setReload} />}
     </div>

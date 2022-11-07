@@ -4,7 +4,7 @@ import { FormGroup, Input, Label, Button } from "reactstrap";
 //others
 import wallpaper from "../assets/register_page.jpg";
 import "./login.css";
-import {loginUser} from "../person/api/user-api";
+import {loginUser} from "../commons/api/user-api";
 
 const Login = () => {
   const [email, setEmail] = useState("");

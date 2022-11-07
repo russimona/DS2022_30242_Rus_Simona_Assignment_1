@@ -1,4 +1,4 @@
-import React  from "react";
+import React, {useEffect}  from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
 //others
@@ -8,6 +8,13 @@ import "./add-device.css";
 // import "./add-user.css";
 
 const AddDevice = () => {
+
+  useEffect(()=>{if(sessionStorage.getItem('sessionToken')){
+    const uid = sessionStorage.getItem('sessionToken');
+    if(!uid.includes('9999999')){
+      window.location.href='/'
+    }
+  }}, [])
 
   return (
     <div

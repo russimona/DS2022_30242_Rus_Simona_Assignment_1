@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
+//actions
+import { postUser } from "../../../commons/api/user-api";
+
 //others
 import wallpaper from "../../../assets/register_page.jpg";
 import NavigationBar from "../../navigation-bar-admin";
 import "./add-user.css";
-import { postUser } from "../../../person/api/user-api";
+
 
 const AddUser = () => {
   const [checkboxAdmin, setCheckboxAdmin] = useState(false);
@@ -23,6 +26,13 @@ const AddUser = () => {
     role_user: "",
   });
 
+  useEffect(()=>{if(sessionStorage.getItem('sessionToken')){
+    const uid = sessionStorage.getItem('sessionToken');
+    if(!uid.includes('9999999')){
+      window.location.href='/'
+    }
+  }}, [])
+  
   useEffect(() => {
     if (checkboxAdmin === true) {
       setRole_user("admin");
@@ -65,7 +75,6 @@ const AddUser = () => {
       }
     });
   };
-
 
   return (
     <div

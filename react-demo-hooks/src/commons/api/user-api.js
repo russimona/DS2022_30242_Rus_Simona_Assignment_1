@@ -1,4 +1,5 @@
-import { HOST } from '../../commons/hosts';
+
+import { HOST } from './hosts';
 import RestApiClient from "../../commons/api/rest-client";
 
 const endpoint = {
@@ -16,7 +17,7 @@ function getUsers(callback) {
 
 
 function getUsersById(params, callback) {
-    let request = new Request(HOST.backend_api + endpoint.users + params.id, {
+    let request = new Request(HOST.backend_api + endpoint.users + "/"+ params, {
         method: 'GET'
     });
 
@@ -51,9 +52,6 @@ function loginUser(email, password, callback) {
 }
 
 function deleteUser(uid, callback) {
-  
-    RestApiClient.performRequest(request, callback);
-    console.log(uid);
     let request = new Request(HOST.backend_api + endpoint.users + '/delete/'+uid, {
         method: 'DELETE',
         headers: {
@@ -66,10 +64,24 @@ function deleteUser(uid, callback) {
     RestApiClient.performRequest(request, callback);
 }
 
+function editUser(user, callback) {
+    let request = new Request(HOST.backend_api + endpoint.users +"/update", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
+    });
+    console.log("URL: " + request.url);
+    RestApiClient.performRequest(request, callback);
+}
+
 export {
     getUsers,
     getUsersById,
     postUser,
     loginUser,
-    deleteUser
+    deleteUser,
+    editUser
 };
