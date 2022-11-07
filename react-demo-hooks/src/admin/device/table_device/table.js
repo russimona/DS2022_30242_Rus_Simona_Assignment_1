@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "react-table/react-table.css";
 import { Col, Row } from "react-bootstrap";
 
@@ -10,12 +10,22 @@ import edit from "../../../assets/edit.png";
 import delete_icon from "../../../assets/delete.png";
 
 function Table({ data, setReload }) {
+  const [emptyResult, setEmptyResult] = useState(false);
+
+  useEffect(() => {
+    console.log(data);
+    if (data.length === 0) setEmptyResult(true);
+    else setEmptyResult(false);
+  }, [data]);
+
+
   const deleteDeviceHandler = (uid) => {
     return deleteDevice(uid, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
+
         setReload(true);
       } else {
-        alert("Error trying to add device");
+        alert("Error trying to delete device");
         console.log("error");
       }
     });
@@ -25,7 +35,6 @@ function Table({ data, setReload }) {
     setReload(false);
   }, [setReload]);
 
-  console.log(data);
   return (
     <div
       style={{
@@ -35,6 +44,7 @@ function Table({ data, setReload }) {
         padding: "20px",
       }}
     >
+     
       <Row>
         <Col>
           <p style={{ fontWeight: "bolder" }}>NAME</p>
@@ -51,8 +61,8 @@ function Table({ data, setReload }) {
         <Col>
           <p style={{ fontWeight: "bolder" }}>EDIT DELETE</p>
         </Col>
-        
       </Row>
+      {emptyResult && <div style = {{color: 'white', fontWeight:'bolder', marginTop: '30px', marginLeft: '40vw'}}>Empty list</div>}
       {data.map((device) => {
         return (
           <Row key={device.id}>
@@ -98,8 +108,6 @@ function Table({ data, setReload }) {
                 />
               </button>
             </Col>
-
-       
           </Row>
         );
       })}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "react-table/react-table.css";
 import { Col, Row } from "react-bootstrap";
 
@@ -10,6 +10,13 @@ import edit from "../../../assets/edit.png";
 import delete_icon from "../../../assets/delete.png";
 
 function Table({ data, setReload }) {
+  const [emptyResult, setEmptyResult] = useState(false);
+  useEffect(() => {
+    console.log(data);
+    if (data.length === 0) setEmptyResult(true);
+    else setEmptyResult(false);
+  }, [data]);
+
   const deleteUserHandler = (uid) => {
     return deleteUser(uid, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
@@ -51,6 +58,18 @@ function Table({ data, setReload }) {
           <p style={{ fontWeight: "bolder" }}>EDIT DELETE</p>
         </Col>
       </Row>
+      {emptyResult && (
+        <div
+          style={{
+            color: "white",
+            fontWeight: "bolder",
+            marginTop: "30px",
+            marginLeft: "40vw",
+          }}
+        >
+          Empty list
+        </div>
+      )}
       {data.map((user) => {
         return (
           <Row key={user.id}>
@@ -93,8 +112,6 @@ function Table({ data, setReload }) {
                 />
               </button>
             </Col>
-
-          
           </Row>
         );
       })}
