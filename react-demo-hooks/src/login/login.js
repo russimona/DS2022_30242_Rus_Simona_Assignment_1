@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   const validateInput = () => {
-    if (email.length < 10 || password.length < 5) {
+    if (email.length < 5 || password.length < 2) {
       setIsAlert(true);
       setAlertMessage("Please enter a valid username and password. ");
     } else {

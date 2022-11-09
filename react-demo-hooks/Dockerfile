@@ -1,4 +1,4 @@
-FROM node:18 as builder
+FROM node:8 as builder
 WORKDIR /app
 COPY package*.json /app/
 RUN npm install --force
