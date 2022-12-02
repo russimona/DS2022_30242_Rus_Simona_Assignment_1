@@ -24,7 +24,6 @@ public class MeasurementsDetailsDTO  extends RepresentationModel<MeasurementsDTO
     @NotNull
     private UUID deviceId;
 
-
     public MeasurementsDetailsDTO(){
 
     }

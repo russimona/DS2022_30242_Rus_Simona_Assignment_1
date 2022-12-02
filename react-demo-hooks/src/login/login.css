@@ -1,12 +1,12 @@
 .wallpaperImage {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  background-image: linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97));
 }
 
 .labelloginform {
   color: white;
-  font-size: 15px;
+  font-size: 10px;
   margin-top: 5vh;
 }
 

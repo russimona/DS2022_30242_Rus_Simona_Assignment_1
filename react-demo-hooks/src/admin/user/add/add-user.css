@@ -6,9 +6,9 @@
 
 .labelform {
   color: white;
-  font-size: 15px;
+  font-size: 10px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 .labelCheckBox {
@@ -27,7 +27,7 @@
 .formadd {
   margin-top: 20px;
   padding: 40px;
-  width: 55vw;
+  width: 50vw;
   margin-left: 25vw;
   background-image: linear-gradient(rgb(116, 172, 196), rgb(17, 56, 97));
   height: auto;
@@ -36,7 +36,7 @@
 .adduserbtn {
   width: 51vw;
   margin: 0px;
-  margin-top: 25px;
+  /* margin-top: 25px; */
 }
 
 .alertText {
@@ -50,6 +50,6 @@
 }
 
 .checkbox {
-  margin-top: 15px;
+  margin-top: 10px;
   margin-left: 20px;
 }

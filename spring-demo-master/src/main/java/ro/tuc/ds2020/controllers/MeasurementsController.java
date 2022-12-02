@@ -31,8 +31,10 @@ public class MeasurementsController {
     }
 
     @PostMapping()
-    public ResponseEntity<UUID> insertMeasurements(@Valid @RequestBody MeasurementsDetailsDTO measurementsDetailsDTO){
+    public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody MeasurementsDetailsDTO measurementsDetailsDTO){
+        System.out.println("measurements before insert"+measurementsDetailsDTO);
         UUID mesID= measurementsService.insertMeasurements(measurementsDetailsDTO);
+        System.out.println(mesID);
         return new ResponseEntity<>(mesID, HttpStatus.CREATED);
     }
 

@@ -35,7 +35,6 @@ function postDevice(device, callback) {
   RestApiClient.performRequest(request, callback);
 }
 
-
 function deleteDevice(uid, callback) {
   let request = new Request(
     HOST.backend_api + endpoint.device + "/delete/" + uid,

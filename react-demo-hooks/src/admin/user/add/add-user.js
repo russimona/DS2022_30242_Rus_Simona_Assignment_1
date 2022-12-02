@@ -28,8 +28,6 @@ const AddUser = () => {
     role_user: "",
   });
 
- 
-
   useEffect(() => {
     if (checkboxAdmin === true) {
       setRole_user("admin");
@@ -79,15 +77,14 @@ const AddUser = () => {
     >
       <NavigationBar />
       <FormGroup className="formadd">
-        <h3 className="titlecreate">Create user</h3>
-        <Label className="labelform" for="emailField">
-          Name
-        </Label>
+        <h4 className="titlecreate">Create user</h4>
+        <Label className="labelform">Name</Label>
         <Input
           name="Name"
           type="text"
           placeholder={"Name"}
           onChange={onChangeHandler}
+          style={{ height: "25px" }}
         />
         <Label className="labelform" for="passwordField">
           Surname
@@ -97,15 +94,15 @@ const AddUser = () => {
           type="text"
           placeholder={"Surname"}
           onChange={onChangeHandler}
+          style={{ height: "25px" }}
         />
-        <Label className="labelform" for="emailField">
-          Email
-        </Label>
+        <Label className="labelform">Email</Label>
         <Input
           name="Email"
           type="text"
           placeholder={"Email"}
           onChange={onChangeHandler}
+          style={{ height: "25px" }}
         />
         <Label className="labelform" for="passwordField">
           Password
@@ -115,6 +112,7 @@ const AddUser = () => {
           type="text"
           placeholder={"Password"}
           onChange={onChangeHandler}
+          style={{ height: "25px" }}
         />
 
         <div className="checkbox">
@@ -155,4 +153,6 @@ const AddUser = () => {
   );
 };
 
-export default sessionStorage?.getItem("sessionToken")?.includes("9999999")?   AddUser : Login;
+export default sessionStorage?.getItem("sessionToken")?.includes("9999999")
+  ? AddUser
+  : Login;

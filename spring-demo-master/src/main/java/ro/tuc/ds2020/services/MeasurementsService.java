@@ -52,7 +52,7 @@ public class MeasurementsService {
     public UUID insertMeasurements(MeasurementsDetailsDTO measurementsDetailsDTO) {
        Optional<Device> prosumerOptional=deviceRepository.findById(measurementsDetailsDTO.getDeviceId());
         if(!prosumerOptional.isPresent()){
-            LOGGER.debug("Device with id {} was not found",measurementsDetailsDTO.getDeviceId());
+            LOGGER.debug("Device with id {} does not exists",measurementsDetailsDTO.getDeviceId());
         }
         Measurements measurements= MeasurementsBuilder.toEntity(measurementsDetailsDTO);
         measurements.setDevice(prosumerOptional.get());

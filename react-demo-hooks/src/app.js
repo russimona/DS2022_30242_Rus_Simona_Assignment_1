@@ -51,10 +51,7 @@ function App() {
               render={() => <UpdateDevice />}
             />
 
-            <Route 
-            exact
-            path='/user'
-            render={()=><UserHome/>}/>
+            <Route exact path="/user" render={() => <UserHome />} />
 
             <Route exact path="/consumption" render={() => <AdminHome />} />
             {/*Error*/}
