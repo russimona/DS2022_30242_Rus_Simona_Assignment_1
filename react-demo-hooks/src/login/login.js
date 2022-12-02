@@ -21,7 +21,7 @@ const Login = () => {
             sessionStorage.setItem('sessionToken', uid)
             window.location.href = '/admin';
           }else{
-            window.location.href='/consumption';
+            window.location.href='/user';
             sessionStorage.setItem('sessionToken', result.id)
           }
         } else {
@@ -36,12 +36,9 @@ const Login = () => {
 
   const handleChange = (event) => {
     if (event.target.name === "email") {
-
       setEmail(event.target.value);
     }
     if (event.target.name === "password") {
-      const email = sessionStorage.getItem('email');
-      console.log(email);
       setPassword(event.target.value);
     }
   };

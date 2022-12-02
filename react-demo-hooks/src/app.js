@@ -13,6 +13,7 @@ import DeviceTable from "./admin/device/table_device/device-table";
 import UsersTable from "./admin/user/show/user-table";
 import UpdateUser from "./admin/user/update/updateUser";
 import UpdateDevice from "./admin/device/update/updateDevice";
+import UserHome from "./user/user-home";
 
 function App() {
   return (
@@ -49,6 +50,12 @@ function App() {
               path="/admin/update-devices"
               render={() => <UpdateDevice />}
             />
+
+            <Route 
+            exact
+            path='/user'
+            render={()=><UserHome/>}/>
+
             <Route exact path="/consumption" render={() => <AdminHome />} />
             {/*Error*/}
             <Route exact path="/error" render={() => <ErrorPage />} />
